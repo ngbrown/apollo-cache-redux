@@ -9,24 +9,21 @@ import {
     APOLLO_WRITE
 } from "./constants";
 import {
-    combineReducers,
-    createStore,
     Store
 } from "redux";
-import { apolloReducer } from "./reducer";
 
 export interface ReduxNormalizedCacheConfig {
     reduxRootSelector?: string
-    store? : Store<any>
+    store : Store<any>
 }
 
 export class ReduxNormalizedCache implements NormalizedCache {
     private store: Store<any>;
     private reduxRootSelector: string;
 
-    constructor(data: NormalizedCacheObject = {}, reduxCacheConfig: ReduxNormalizedCacheConfig = {}) {
+    constructor(data: NormalizedCacheObject = {}, reduxCacheConfig: ReduxNormalizedCacheConfig) {
         this.reduxRootSelector = reduxCacheConfig.reduxRootSelector || 'apollo';
-        this.store = reduxCacheConfig.store || createStore(combineReducers({ [this.reduxRootSelector]: apolloReducer } ));
+        this.store = reduxCacheConfig.store;
         this.store.dispatch({
             type: APOLLO_OVERWRITE,
             data
