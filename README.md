@@ -11,6 +11,7 @@ npm install apollo-cache-redux --save
 After installing the package:
 ```js
 import { ReduxCache, apolloReducer } from 'apollo-cache-redux';
+import { createStore, combineReducers } from 'redux';
 import { HttpLink } from 'apollo-link-http';
 import ApolloClient from 'apollo-client';
 
