@@ -1,4 +1,4 @@
-import { merge, cloneDeep } from 'lodash';
+import { merge } from './merge';
 import { Reducer } from 'redux';
 import {
     APOLLO_OVERWRITE,
@@ -15,8 +15,7 @@ export function apolloReducer(state = initialState, action: any): Reducer<any> {
         case APOLLO_OVERWRITE:
             return action.data;
         case APOLLO_WRITE:
-            const newObj = cloneDeep(state);
-            return merge(newObj, action.data);
+            return merge(state, action.data);
         default:
             return state;
     }
