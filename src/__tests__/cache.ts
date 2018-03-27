@@ -1,9 +1,8 @@
-import {ApolloCache} from 'apollo-cache';
 import gql, {disableFragmentWarnings} from 'graphql-tag';
 import { combineReducers, createStore } from 'redux';
 
 import {ReduxCache} from '..';
-import {ApolloReducerConfig, NormalizedCache} from 'apollo-cache-inmemory';
+import {ApolloReducerConfig} from 'apollo-cache-inmemory';
 import { apolloReducer } from "../reducer";
 
 disableFragmentWarnings();
@@ -15,7 +14,7 @@ describe('Cache', () => {
                          }: {
         initialState?: any;
         config?: ApolloReducerConfig;
-    } = {},): ApolloCache<NormalizedCache> {
+    } = {},): ReduxCache {
         const store = createStore(
             combineReducers({
                 apollo: apolloReducer
@@ -997,6 +996,7 @@ describe('Cache', () => {
                         type: 'id',
                         id: 'bar',
                         generated: false,
+                        typename: 'Bar',
                     },
                 },
                 bar: {
@@ -1039,6 +1039,7 @@ describe('Cache', () => {
                         type: 'id',
                         id: 'bar',
                         generated: false,
+                        typename: 'Bar',
                     },
                 },
                 bar: {
@@ -1200,7 +1201,7 @@ describe('Cache', () => {
                 });
 
                 expect(numBroadcasts).toEqual(0);
-            }, 1);
+            }, '1');
 
             expect(numBroadcasts).toEqual(1);
         });
